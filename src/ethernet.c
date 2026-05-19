@@ -37,7 +37,40 @@ void ethernet_print_mac(const uint8_t *mac) {
 }
 
 /*
- * To-Do
- *
- * Implement ethernet_handle_frame()
+ * A parser for displaying information about an Ethernet frame
  */
+void ethernet_handle_frame(const uint8_t *frame, size_t len) {
+
+	// Ensuring the frame is large enough to contain a valid header
+	if (len < ETH_HEADER_LEN) {
+		fprintf(stderr, "[ETH] Frame too short\n");
+		return;
+	}
+
+	// Interpreting the beginning of the buffer as the Eth header
+	const struct eth_header *eth = (const struct eth_header *)frame;
+
+	/*
+	 * Converting EtherType from network byte order (big endian) 
+	 * into host byte order
+	 */
+	uint16_t ethertype = ntohs(eth->ethertype);
+
+	printf("\n========== Ethernet Frame ==========\n");
+
+	printf("Destination MAC: ");
+	ethernet_print_mac(eth->dst_mac);
+	printf("\n");
+
+	printf("Source MAC: ");
+	ethernet_print_mac(eth->src_mac);
+	printf("\n");
+
+	printf("EtherType:       0x%04x (%s)\n",
+			ethertype,
+			ethernet_ethertype_to_str(ethertype));
+
+	printf("Frame Length:    %zu bytes\n", len);
+
+	printf("===================================\n");
+}
