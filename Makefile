@@ -8,7 +8,7 @@ CC = gcc
 # -g -> include debug symbols
 # -O0 -> disabling optimization for easier debugging
 # -Iinclude -> tell the compiler where header files are
-CFLAGS = -Wall -Westra -g -O0 -Iinclude
+CFLAGS = -Wall -Wextra -g -O0 -Iinclude
 
 # Final executable
 TARGET = tiny.netstack

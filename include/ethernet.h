@@ -71,3 +71,5 @@ const char *ethernet_ethertype_to_str(uint16_t ethertype);
  * Pretty print a MAC address
  */
 void ethernet_print_mac(const uint8_t *mac);
+
+#endif
