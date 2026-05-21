@@ -8,6 +8,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdint.h>
+#include <net/if.h>
 
 #include "tap.h"
 #include "util.h"

@@ -38,7 +38,7 @@ void ethernet_print_mac(const uint8_t *mac) {
 	for (int i = 0; i < ETH_ADDR_LEN; i++) {
 		// %02x pads with zeroes (if needed) to ensure 
 		// a width of 2 characters
-		print("%02x", mac[i]);
+		printf("%02x", mac[i]);
 
 		if (i != ETH_ADDR_LEN - 1) {
 			printf(":");

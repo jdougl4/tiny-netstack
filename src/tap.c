@@ -43,7 +43,7 @@ int tap_open(char *devname) {
 	 * if = interface
 	 * req = request
 	 */
-	struct ifreq *ifr;
+	struct ifreq ifr;
 
 	
 	/*
