@@ -15,8 +15,8 @@ TARGET = tiny.netstack
 
 # Source files
 SRC = \
-      src\main.c \
-      src\tap.c \
+      src/main.c \
+      src/tap.c \
       src/ethernet.c \
       src/util.c
 
