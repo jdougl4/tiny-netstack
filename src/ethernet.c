@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <arpa/inet.h>
 #include "ethernet.h"
+#include "arp.h"
 
 /*
  * Convert EtherType to a readable format
@@ -109,4 +110,24 @@ void ethernet_handle_frame(const uint8_t *frame, size_t len) {
 	printf("Frame Length:    %zu bytes\n", len);
 
 	printf("===================================\n");
+
+	// Pointer to payload immediately after Ethernet header
+	const uint8_t *payload = frame + ETH_HEADER_LEN;
+
+	// Payload length excludes Ethernet header
+	size_t payload_len = len - ETH_HEADER_LEN;
+
+	// Dispatch packet based on EtherType
+	switch (ethertype) {
+
+		case ETHERTYPE_ARP:
+
+			arp_handle_packet(payload, payload_len);
+
+			break;
+
+		default:
+
+			break;
+	}
 }

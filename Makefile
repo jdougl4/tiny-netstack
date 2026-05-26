@@ -18,6 +18,7 @@ SRC = \
       src/main.c \
       src/tap.c \
       src/ethernet.c \
+      src/arp.c \
       src/util.c
 
 # Object files
