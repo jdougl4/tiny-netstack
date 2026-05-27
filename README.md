@@ -26,6 +26,8 @@ TAP Interface Setup:
 - Verify: ip addr show tap0
 - Delete it: sudo ip link delete tap0
 
+I have hacked out a simple script to automate the TAP interface setup--use it if you'd like. Just remember to run "chmod +x scripts/setup_tap.sh"
+
 To Run: sudo ./tiny-netstack
 
 I recommend opening a separate terminal and pinging your TAP interface while the program is running. Depending on your kernel's networking state/ARP cache contents you may see ARP, IPv4, or IPv6 traffic (as denoted solely by the EtherType), broadcast frames, or neighbor discovery traffic.
