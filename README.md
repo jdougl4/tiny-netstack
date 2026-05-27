@@ -1,17 +1,31 @@
-I am setting out to implement a tiny userspace network stack as an engineering project. My goal is to write something that can receive raw Ethernet frames, parse the headers manually, maintain its own tiny state tables, then craft replies and send them back. 
+tiny-netstack is a project I've started to try to better understand network programming and how networking protocols work at a low level. tiny-netstack is my in-development attempt to write a userspace network stack written in C for Linux using TAP interfaces.
 
-This is my first commit so I only have a partial idea of how I'm going to go about this. But ideally, in addition to the core functionality, I'd like to also provide packet capture/architecture diagrams, as well as benchmarks.
+It does not offer any practical functionality in addition to what your kernel probably already gives you. It's more of a learning exercise to teach packet parsing, byte ordering, protocol implementation, Linux networking internals, and a ton of other stuff that I am painfully discovering along the way.
 
-Eventually I will update this README to reflect core features as they are implemented.
+My current implementation supports:
+- TAP interface integration
+- Ethernet frame reception
+- Ethernet header parsing
+- EtherType identification
+- ARP packet parsing/display
 
-EDIT1 20 May 2026: Code successfully compiles with 'make'. Before running, 
-must create/configure TAP device first:
+My future goals for the project are:
+- ARP replies
+- IPv4 parsing
+- ICMP echo replies
+- Checksum handling
+- ARP cache
 
-1. sudo ip tuntap add dev tap0 mode tap
-2. sudo ip addr add 10.0.0.1/24 dev tap0
-3. sudo ip link set tap0 up
+Build Instrutions:
+- Clone and compile with 'make'
 
-And verify with:
-4. ip addr show tap0
+TAP Interface Setup:
+- Create a TAP interface: sudo ip tuntap add dev tap0 mode tap
+- Assign IPv4 address: sudo ip addr add 10.0.0.1/24 dev tap0
+- Bring it online: sudo ip link set tap0 up
+- Verify: ip addr show tap0
+- Delete it: sudo ip link delete tap0
 
-Then sudo ./tiny-netstack to run.
+To Run: sudo ./tiny-netstack
+
+I recommend opening a separate terminal and pinging your TAP interface while the program is running. Depending on your kernel's networking state/ARP cache contents you may see ARP, IPv4, or IPv6 traffic (as denoted solely by the EtherType), broadcast frames, or neighbor discovery traffic.

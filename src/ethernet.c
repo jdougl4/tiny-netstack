@@ -96,7 +96,7 @@ void ethernet_handle_frame(const uint8_t *frame, size_t len) {
 	ethernet_print_mac(eth->dst_mac);
 	printf("\n");
 
-	printf("Source MAC: ");
+	printf("Source MAC:      ");
 	ethernet_print_mac(eth->src_mac);
 	printf("\n");
 
